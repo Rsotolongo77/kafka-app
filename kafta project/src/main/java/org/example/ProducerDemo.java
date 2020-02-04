@@ -24,8 +24,13 @@ public class ProducerDemo {
         KafkaProducer<String, String> producer = new KafkaProducer<String, String>(properties);
 
         for (int i=0; i<10; i++){
+
+            String key = "Key" + Integer.toString(i);
             //create a producer record
-            ProducerRecord<String, String> record = new ProducerRecord<String, String>("first_topic", "hello world" + Integer.toString(i));
+            ProducerRecord<String, String> record = new
+                    ProducerRecord<String, String>("first_topic", key, "hello world" + Integer.toString(i));
+
+            logger.info("Key: " + key);
 
             //send data
             producer.send(record, new Callback() {
